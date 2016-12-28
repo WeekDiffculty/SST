@@ -140,9 +140,14 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             NSArray *array = @[weakself.gewei,weakself.fenshu,weakself.lifang];
             NSInteger length = responseObject.price.length;
-            weakself.gewei.text = [responseObject.price substringToIndex:(length -3)];
-            weakself.fenshu.text = [responseObject.price substringWithRange:NSMakeRange(length-3, 2)];
-            weakself.lifang.text = [responseObject.price substringFromIndex:(length -1)];
+            if (length>3) {
+                weakself.gewei.text = [responseObject.price substringToIndex:(length -3)];
+                weakself.fenshu.text = [responseObject.price substringWithRange:NSMakeRange(length-3, 2)];
+                weakself.lifang.text = [responseObject.price substringFromIndex:(length -1)];
+
+            }else{
+                weakself.gewei.text = responseObject.price;
+            }
             weakself.price = responseObject.price;
             [weakself changeColor:[responseObject.price substringFromIndex:(responseObject.price.length -1)].integerValue labelArray:array];
         });

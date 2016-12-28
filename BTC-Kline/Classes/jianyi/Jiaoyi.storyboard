@@ -447,7 +447,7 @@
                                                         <rect key="frame" x="0.0" y="37.5" width="171.5" height="37.5"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
                                                         <connections>
                                                             <outlet property="delegate" destination="Wad-cr-URv" id="S7y-fK-hZg"/>
                                                         </connections>
@@ -479,7 +479,7 @@
                                                         <rect key="frame" x="0.0" y="37.5" width="171.5" height="37.5"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
                                                         <connections>
                                                             <outlet property="delegate" destination="Wad-cr-URv" id="iuH-VT-xLi"/>
                                                         </connections>

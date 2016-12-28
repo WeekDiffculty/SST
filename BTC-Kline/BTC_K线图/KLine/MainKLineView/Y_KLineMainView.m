@@ -95,9 +95,13 @@
     CGContextSetFillColorWithColor(context, [UIColor backgroundColor].CGColor);
     CGContextFillRect(context, rect);
     
-   // 设置显示日期的区域背景颜色
-    CGContextSetFillColorWithColor(context, [UIColor backgroundColor].CGColor);
+    //设置显示日期的区域背景颜色
+    CGContextSetFillColorWithColor(context, [UIColor assistBackgroundColor].CGColor);
     CGContextFillRect(context, CGRectMake(0, Y_StockChartKLineMainViewMaxY, self.frame.size.width, self.frame.size.height - Y_StockChartKLineMainViewMaxY));
+    
+    
+    
+    
     
     Y_MALine *MALine = [[Y_MALine alloc]initWithContext:context];
     
@@ -105,7 +109,7 @@
     {
         Y_KLine *kLine = [[Y_KLine alloc]initWithContext:context];
         kLine.maxY = Y_StockChartKLineMainViewMaxY;
-
+        
         [self.needDrawKLinePositionModels enumerateObjectsUsingBlock:^(Y_KLinePositionModel * _Nonnull kLinePositionModel, NSUInteger idx, BOOL * _Nonnull stop) {
             kLine.kLinePositionModel = kLinePositionModel;
             kLine.kLineModel = self.needDrawKLineModels[idx];
@@ -113,7 +117,7 @@
             [kLineColors addObject:kLineColor];
         }];
     } else {
-        NSMutableArray *positions = @[].mutableCopy;
+        __block NSMutableArray *positions = @[].mutableCopy;
         [self.needDrawKLinePositionModels enumerateObjectsUsingBlock:^(Y_KLinePositionModel * _Nonnull positionModel, NSUInteger idx, BOOL * _Nonnull stop) {
             UIColor *strokeColor = positionModel.OpenPoint.y < positionModel.ClosePoint.y ? [UIColor increaseColor] : [UIColor decreaseColor];
             [kLineColors addObject:strokeColor];
@@ -122,20 +126,20 @@
         MALine.MAPositions = positions;
         MALine.MAType = -1;
         [MALine draw];
-//        
+        //
+        __block CGPoint lastDrawDatePoint = CGPointZero;//fix
         [self.needDrawKLinePositionModels enumerateObjectsUsingBlock:^(Y_KLinePositionModel * _Nonnull positionModel, NSUInteger idx, BOOL * _Nonnull stop) {
             
             CGPoint point = [positions[idx] CGPointValue];
             
             //日期
             
-            NSDate *date = [NSDate dateWithTimeIntervalSince1970:self.needDrawKLineModels[idx].Date.doubleValue];
+            NSDate *date = [NSDate dateWithTimeIntervalSince1970:self.needDrawKLineModels[idx].Date.doubleValue/1000];
             NSDateFormatter *formatter = [NSDateFormatter new];
             formatter.dateFormat = @"HH:mm";
             NSString *dateStr = [formatter stringFromDate:date];
- 
+            
             CGPoint drawDatePoint = CGPointMake(point.x + 1, Y_StockChartKLineMainViewMaxY + 1.5);
-            CGPoint lastDrawDatePoint;
             if(CGPointEqualToPoint(lastDrawDatePoint, CGPointZero) || point.x - lastDrawDatePoint.x > 60 )
             {
                 [dateStr drawAtPoint:drawDatePoint withAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:11],NSForegroundColorAttributeName : [UIColor assistTextColor]}];
@@ -155,7 +159,7 @@
         MALine.MAPositions = self.MA30Positions;
         [MALine draw];
     }
-
+    
     
     if(self.delegate && kLineColors.count > 0)
     {
@@ -171,9 +175,6 @@
 #pragma mark 重新设置相关数据，然后重绘
 - (void)drawMainView
 {
-    if(!self.kLineModels){
-        return;
-    }
     NSAssert(self.kLineModels, @"kLineModels不能为空");
     
     //提取需要的kLineModel
@@ -196,27 +197,27 @@
     if(kLineViewWidth < self.parentScrollView.bounds.size.width) {
         kLineViewWidth = self.parentScrollView.bounds.size.width;
     }
-//    if (kLineViewWidth < [UIScreen mainScreen].bounds.size.width) {
-//        kLineViewWidth = [UIScreen mainScreen].bounds.size.width;
-//    }
+    //    if (kLineViewWidth < [UIScreen mainScreen].bounds.size.width) {
+    //        kLineViewWidth = [UIScreen mainScreen].bounds.size.width;
+    //    }
     
     [self mas_updateConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@(kLineViewWidth));
     }];
-
+    
     [self layoutIfNeeded];
     
     //更新scrollview的contentsize
     self.parentScrollView.contentSize = CGSizeMake(kLineViewWidth, self.parentScrollView.contentSize.height);
-//    CGFloat offset = self.parentScrollView.contentSize.width - self.parentScrollView.bounds.size.width;
-//    if (offset > 0)
-//    {
-//        NSLog(@"计算出来的位移%f",offset);
-//        [self.parentScrollView setContentOffset:CGPointMake(offset, 0) animated:YES];
-//    } else {
-//        NSLog(@"计算出来的位移%f",offset);
-//        [self.parentScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
-//    }
+    //    CGFloat offset = self.parentScrollView.contentSize.width - self.parentScrollView.bounds.size.width;
+    //    if (offset > 0)
+    //    {
+    //        NSLog(@"计算出来的位移%f",offset);
+    //        [self.parentScrollView setContentOffset:CGPointMake(offset, 0) animated:YES];
+    //    } else {
+    //        NSLog(@"计算出来的位移%f",offset);
+    //        [self.parentScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    //    }
 }
 
 /**
@@ -241,7 +242,7 @@
             }
             return kLinePositionModel.HighPoint.x;
         }
-
+        
     }
     return 0.f;
 }
@@ -260,13 +261,15 @@
     //起始位置
     NSInteger needDrawKLineStartIndex ;
     
-    if(self.pinchStartIndex > 0) {//捏合点
+    if(self.pinchStartIndex > 0) {
         needDrawKLineStartIndex = self.pinchStartIndex;
         _needDrawStartIndex = self.pinchStartIndex;
         self.pinchStartIndex = -1;
     } else {
-       needDrawKLineStartIndex = self.needDrawStartIndex;
+        needDrawKLineStartIndex = self.needDrawStartIndex;
     }
+    
+    
     NSLog(@"这是模型开始的index-----------%lu",needDrawKLineStartIndex);
     [self.needDrawKLineModels removeAllObjects];
     
@@ -298,14 +301,14 @@
     
     NSArray *kLineModels = self.needDrawKLineModels;
     
-    //计算最小单位 最高价和最低价的计算
+    //计算最小单位
     Y_KLineModel *firstModel = kLineModels.firstObject;
     __block CGFloat minAssert = firstModel.Low.floatValue;
     __block CGFloat maxAssert = firstModel.High.floatValue;
-//    __block CGFloat minMA7 = CGFLOAT_MAX;
-//    __block CGFloat maxMA7 = CGFLOAT_MIN;
-//    __block CGFloat minMA30 = CGFLOAT_MAX;
-//    __block CGFloat maxMA30 = CGFLOAT_MIN;
+    //    __block CGFloat minMA7 = CGFLOAT_MAX;
+    //    __block CGFloat maxMA7 = CGFLOAT_MIN;
+    //    __block CGFloat minMA30 = CGFLOAT_MAX;
+    //    __block CGFloat maxMA30 = CGFLOAT_MIN;
     
     [kLineModels enumerateObjectsUsingBlock:^(Y_KLineModel * _Nonnull kLineModel, NSUInteger idx, BOOL * _Nonnull stop) {
         if(kLineModel.High.floatValue > maxAssert)
@@ -334,8 +337,10 @@
                 maxAssert = kLineModel.MA30.floatValue;
             }
         }
-
+        
     }];
+    
+    
     
     maxAssert *= 1.0001;
     minAssert *= 0.9991;
@@ -345,8 +350,8 @@
     CGFloat maxY = self.parentScrollView.frame.size.height * [Y_StockChartGlobalVariable kLineMainViewRadio] - 15;
     
     CGFloat unitValue = (maxAssert - minAssert)/(maxY - minY);
-//    CGFloat ma7UnitValue = (maxMA7 - minMA7) / (maxY - minY);
-//    CGFloat ma30UnitValue = (maxMA30 - minMA30) / (maxY - minY);
+    //    CGFloat ma7UnitValue = (maxMA7 - minMA7) / (maxY - minY);
+    //    CGFloat ma30UnitValue = (maxMA30 - minMA30) / (maxY - minY);
     
     
     [self.needDrawKLinePositionModels removeAllObjects];
@@ -400,7 +405,7 @@
         
         Y_KLinePositionModel *kLinePositionModel = [Y_KLinePositionModel modelWithOpen:openPoint close:closePoint high:highPoint low:lowPoint];
         [self.needDrawKLinePositionModels addObject:kLinePositionModel];
-         
+        
         
         //MA坐标转换
         CGFloat ma7Y = maxY;
@@ -411,7 +416,7 @@
             {
                 ma7Y = maxY - (kLineModel.MA7.floatValue - minAssert)/unitValue;
             }
-
+            
         }
         if(unitValue > 0.0000001)
         {
@@ -425,6 +430,7 @@
         
         CGPoint ma7Point = CGPointMake(xPosition, ma7Y);
         CGPoint ma30Point = CGPointMake(xPosition, ma30Y);
+        
         if(kLineModel.MA7)
         {
             [self.MA7Positions addObject: [NSValue valueWithCGPoint: ma7Point]];
@@ -499,7 +505,7 @@ static char *observerContext = NULL;
             self.oldContentOffsetX = self.parentScrollView.contentOffset.x;
             [self drawMainView];
         }
-    
+        
     }
 }
 

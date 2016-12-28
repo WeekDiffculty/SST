@@ -60,15 +60,6 @@
                 self.gewei.text = str;
             }
            
-            //
-            if (length>3) {
-                self.hGewei.text = [str substringToIndex:(length -3)];
-                self.hFenshu.text = [str substringWithRange:NSMakeRange(length-3, 2)];
-              self.hLifang.text = [str substringFromIndex:(length -1)];
-            }else{
-                self.gewei.text = str;
-            }
-           
             
            
             NSArray *array = @[self.gewei,self.fenshu,self.lifang,self.hGewei,self.hFenshu,self.hLifang];

@@ -92,6 +92,8 @@
 		C0E412671DD9C2FA00798679 /* TubiaoSetUPTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0E412661DD9C2FA00798679 /* TubiaoSetUPTableViewController.m */; };
 		C0F34A911DDECAD500E860CD /* GuanyuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F34A901DDECAD500E860CD /* GuanyuViewController.m */; };
 		C0F34A941DDEDAD200E860CD /* XieyiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F34A931DDEDAD200E860CD /* XieyiViewController.m */; };
+		DF172BEA1E1269EA0029E23C /* K图的bug更新 in Resources */ = {isa = PBXBuildFile; fileRef = DF172BE91E1269EA0029E23C /* K图的bug更新 */; };
+		DF172BEC1E126B000029E23C /* 原 in Resources */ = {isa = PBXBuildFile; fileRef = DF172BEB1E126B000029E23C /* 原 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -251,6 +253,8 @@
 		C0F34A901DDECAD500E860CD /* GuanyuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuanyuViewController.m; sourceTree = "<group>"; };
 		C0F34A921DDEDAD200E860CD /* XieyiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XieyiViewController.h; sourceTree = "<group>"; };
 		C0F34A931DDEDAD200E860CD /* XieyiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XieyiViewController.m; sourceTree = "<group>"; };
+		DF172BE91E1269EA0029E23C /* K图的bug更新 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "K图的bug更新"; sourceTree = "<group>"; };
+		DF172BEB1E126B000029E23C /* 原 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "原"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -412,6 +416,8 @@
 				84681C8A1CD728F8008A8157 /* Line */,
 				84681C7E1CD4B56E008A8157 /* Y_KLineMainView.h */,
 				84681C7F1CD4B56E008A8157 /* Y_KLineMainView.m */,
+				DF172BE91E1269EA0029E23C /* K图的bug更新 */,
+				DF172BEB1E126B000029E23C /* 原 */,
 			);
 			path = MainKLineView;
 			sourceTree = "<group>";
@@ -880,6 +886,7 @@
 				C0E412641DD9AB1F00798679 /* goods.plist in Resources */,
 				C08DD3D61DE299A50090E528 /* Logined.xib in Resources */,
 				C02B728D1DDD49CB005FBE1C /* DetailCell.xib in Resources */,
+				DF172BEA1E1269EA0029E23C /* K图的bug更新 in Resources */,
 				189433E41DD4838F00F3D618 /* SimpleCell.xib in Resources */,
 				A151EC561E08CEEA00DB9ADA /* defaultGoods.plist in Resources */,
 				84FFC0F01CD31EBD00C749F6 /* 指标公式.md in Resources */,
@@ -893,6 +900,7 @@
 				C003941E1DF5114100514803 /* orderEdting.xib in Resources */,
 				C0438D8D1DE6B54F0030C894 /* BalanceCell.xib in Resources */,
 				187D5D3B1DD58E6C0064B084 /* SeniorCell.xib in Resources */,
+				DF172BEC1E126B000029E23C /* 原 in Resources */,
 				183E27801DD5C8D600033F60 /* JSViewController.xib in Resources */,
 				C0438D921DE6B56E0030C894 /* BalanceDetailCell.xib in Resources */,
 			);
