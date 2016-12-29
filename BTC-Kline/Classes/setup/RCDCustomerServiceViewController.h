@@ -1,13 +1,13 @@
+////
+////  RCDCustomerServiceViewController.h
+////  RCloudMessage
+////
+////  Created by litao on 16/2/23.
+////  Copyright © 2016年 RongCloud. All rights reserved.
+////
 //
-//  RCDCustomerServiceViewController.h
-//  RCloudMessage
+//#import <RongIMKit/RongIMKit.h>
 //
-//  Created by litao on 16/2/23.
-//  Copyright © 2016年 RongCloud. All rights reserved.
+//@interface RCDCustomerServiceViewController : RCConversationViewController
 //
-
-#import <RongIMKit/RongIMKit.h>
-
-@interface RCDCustomerServiceViewController : RCConversationViewController
-
-@end
+//@end
