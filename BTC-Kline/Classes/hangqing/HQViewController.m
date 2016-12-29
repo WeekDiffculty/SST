@@ -37,7 +37,7 @@
         _noDateView.textAlignment = NSTextAlignmentCenter;
         _noDateView.backgroundColor = [UIColor grayColor];
         _noDateView.userInteractionEnabled = YES;
-        [self.view addSubview:_noDateView];
+        [self.view addSubview:self.noDateView];
     }
     return _noDateView;
 }
@@ -133,19 +133,28 @@
 }
 //监测网络
 - (void) chekNet{
-    [NetWorking netStatus:HQJK success:^(BOOL netIsconnect) {
+    [NetWorking netStatus:HQJK success:^(BOOL netIsconnect){
         if (netIsconnect) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.noDateView removeFromSuperview];
                 self.noDateView = nil;
+                [self.timer fire];
                 NSLog(@"%@", self.arrayData);
                 [self.tabView reloadData]; 
             });
                    }else{
-            [self.view addSubview:self.noDateView];
-            self.arrayData = nil;
-            [self tip:@"网络或服务器异常，请稍后再试"];
+              dispatch_async(dispatch_get_main_queue(), ^{
+                  [self.view addSubview:self.noDateView];
+                  self.arrayData = nil;
+                  [self.timer invalidate];
+                  //[self tip:@"网络或服务器异常，请稍后再试"];
+              });
         }
+    }fial:^(BOOL fial) {
+        [self.view addSubview:self.noDateView];
+        self.arrayData = nil;
+        [self.timer invalidate];
+
     }];
 }
 - (void)tip:(NSString *)str{

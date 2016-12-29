@@ -124,7 +124,6 @@
             cell.model = model;
             return  cell;
         }
-        
     }else{
         NomalCell *cell = [NomalCell cellWith:tableView];
         cell.delegate = self;
@@ -148,9 +147,7 @@
             [self.tableView reloadData];
             [self profie];
         });
-        
     } fail:^(NSError *error) {
-        
     }];
     
     WeakObj(self);
@@ -171,7 +168,6 @@
         self.profit += [model.profit doubleValue];
     }
      self.symbolAndBanlance.text = [NSString stringWithFormat:@"%g",self.profit];
-   
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     self.isDetail = !_isDetail;
@@ -200,11 +196,12 @@
 }
 #pragma orderEdtingDelegate 平仓
 - (void)OpenPosionWithOptionView:(UIView *)optionView withSymbol:(NSString *)symbol{
-    [NetWorking unwindWithApi:CLOSE_POSITION param:self.jioayiModel success:^(NSString *responseObject) {
-        if ([responseObject isEqualToString:@"error"]) {
-            [self tip:@"平仓失败"];
-        }else{
-            [self tip:[NSString stringWithFormat:@"订单关闭，以%@价格平仓",self.jioayiModel.close_price]];
+    [NetWorking unwindWithApi:CLOSE_POSITION param:self.jioayiModel success:^(NSDictionary *responseObject) {
+        NSString *resault = responseObject[@"error"];
+        if ([resault isEqualToString:@""]) {
+           [self tip:[NSString stringWithFormat:@"订单关闭，以%@价格平仓",self.jioayiModel.close_price]];
+        }else if(![resault isEqualToString:@""]&&resault){
+            [self tip:[NSString stringWithFormat:@"平仓失败，失败码 %@",resault]];
         }
     } fail:^(NSError *error) {
         [self tip:@"服务器有点累了，等下再试^_^"];
@@ -215,7 +212,6 @@
     
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:str preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *yes = [UIAlertAction actionWithTitle:@"知道了" style:0 handler:^(UIAlertAction * _Nonnull action) {
-        
     }];
     [alertVC addAction:yes];
     [self presentViewController:alertVC animated:YES completion:nil];

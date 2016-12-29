@@ -27,6 +27,7 @@
 @property (nonatomic, strong) NSTimer *timer;
 @property (weak, nonatomic) IBOutlet UIButton *oderTo;
 @property (nonatomic, strong) UIDatePicker *datePicker;
+@property (nonatomic) BOOL isSuccess;
 @end
 
 @implementation NextJiaoyiViewController
@@ -56,9 +57,7 @@
         self.symbolanddescription.text = [NSString stringWithFormat:@"%@-%@",self.model.symbolName,self.model.descriptions];
     }else{
         self.symbolanddescription.text = [NSString stringWithFormat:@"%@",self.symbol];
-
     }
-    
       self.cmds.text = self.cmd;
     self.volumss.text = [NSString stringWithFormat:@"%g",self.volums];
     self.piancha.inputView = self.datePicker;
@@ -71,7 +70,6 @@
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    
 }
 
 //下单
@@ -100,13 +98,15 @@
         [self tip:@"目前只支持即时买入、即时卖出哦！"];
         return;
     }
-    NSString *openURL = [NSString stringWithFormat:@"%@?type=%@&volume=%@&price=%@&symbol=%@&cmd=%@&SL=%@&TP=%@&server=%@&login=%@&pwd=%@",OPEN_POSITION,@"openorder",@(self.volums),self.price,self.model.symbolName,cmd,self.SL?self.SL:@0,self.TP?self.TP:@0,self.server?self.server:@0,ccount.account,ccount.password];
-    [NetWorking openPositionWithApi:openURL param:nil success:^(NSString *responseObject) {
-        if (![responseObject isEqualToString:@"error"]) {
+    NSString *openURL = [NSString stringWithFormat:@"%@?type=%@&volume=%@&price=%@&symbol=%@&cmd=%@&SL=%@&TP=%@&server=%@&login=%@&pwd=%@",OPEN_POSITION,@"openorder",@(self.volums),self.price,self.model.symbolName?self.model.symbolName:self.symbol,cmd,self.SL?self.SL:@0,self.TP?self.TP:@0,self.server?self.server:@0,ccount.account,ccount.password];
+    [NetWorking openPositionWithApi:openURL param:nil success:^(NSDictionary *responseObject) {
+        NSString *resault = responseObject[@"error"];
+        if ([resault isEqualToString:@""]) {
             [self jiaoyiSuccess];
-        }else{
-            [self tip:@"交易失败"];
-        }    } fail:^(NSError *error) {
+        }else if(![resault isEqualToString:@""]&&resault){
+            [self tip:[NSString stringWithFormat:@"交易失败，失败码 %@",resault]];
+        }
+    } fail:^(NSError *error) {
         NSLog(@"%@",error.userInfo);
     }];
 }
@@ -115,7 +115,7 @@
     WeakObj(self);
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:str preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *yes = [UIAlertAction actionWithTitle:@"知道了" style:0 handler:^(UIAlertAction * _Nonnull action) {
-        if ([str isEqualToString:@"交易成功"]) {
+        if (weakself.isSuccess) {
             [weakself.navigationController popToRootViewControllerAnimated:YES];
         }
     }];
@@ -124,7 +124,9 @@
 }
 
 - (void) jiaoyiSuccess{
-    [self tip:@"交易成功"];
+    self.isSuccess = YES;
+    [self tip:[NSString stringWithFormat:@"以当前价格%@交易成功！",self
+               .price]];
 }
 
 - (void)setCurrentPrice{
@@ -151,11 +153,9 @@
             weakself.price = responseObject.price;
             [weakself changeColor:[responseObject.price substringFromIndex:(responseObject.price.length -1)].integerValue labelArray:array];
         });
-        
     } fail:^(NSError *error) {
         NSLog(@"%@",error);
     }];
-
 }
 - (void)viewWillAppear:(BOOL)animated{
     self.timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(setCurrentPrice) userInfo:nil repeats:YES];

@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "phone.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "add_22x22_@2x.png",
       "scale" : "2x"
     },
     {

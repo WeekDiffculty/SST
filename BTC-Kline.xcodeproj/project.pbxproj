@@ -94,6 +94,7 @@
 		C0F34A941DDEDAD200E860CD /* XieyiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F34A931DDEDAD200E860CD /* XieyiViewController.m */; };
 		DF172BEA1E1269EA0029E23C /* K图的bug更新 in Resources */ = {isa = PBXBuildFile; fileRef = DF172BE91E1269EA0029E23C /* K图的bug更新 */; };
 		DF172BEC1E126B000029E23C /* 原 in Resources */ = {isa = PBXBuildFile; fileRef = DF172BEB1E126B000029E23C /* 原 */; };
+		DF172BEF1E135E590029E23C /* GuanwangViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF172BEE1E135E590029E23C /* GuanwangViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -255,6 +256,8 @@
 		C0F34A931DDEDAD200E860CD /* XieyiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XieyiViewController.m; sourceTree = "<group>"; };
 		DF172BE91E1269EA0029E23C /* K图的bug更新 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "K图的bug更新"; sourceTree = "<group>"; };
 		DF172BEB1E126B000029E23C /* 原 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "原"; sourceTree = "<group>"; };
+		DF172BED1E135E590029E23C /* GuanwangViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuanwangViewController.h; sourceTree = "<group>"; };
+		DF172BEE1E135E590029E23C /* GuanwangViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuanwangViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -733,6 +736,8 @@
 				C0F34A901DDECAD500E860CD /* GuanyuViewController.m */,
 				C0F34A921DDEDAD200E860CD /* XieyiViewController.h */,
 				C0F34A931DDEDAD200E860CD /* XieyiViewController.m */,
+				DF172BED1E135E590029E23C /* GuanwangViewController.h */,
+				DF172BEE1E135E590029E23C /* GuanwangViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -855,7 +860,13 @@
 				TargetAttributes = {
 					84C0D7851CD117B40013B3D4 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 3YVUZZ83WV;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Siri = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -993,6 +1004,7 @@
 				189433DA1DD4647E00F3D618 /* LSViewController.m in Sources */,
 				84C0D78E1CD117B40013B3D4 /* AppDelegate.m in Sources */,
 				84681C901CD7325F008A8157 /* Y_MALine.m in Sources */,
+				DF172BEF1E135E590029E23C /* GuanwangViewController.m in Sources */,
 				84681C9D1CD89954008A8157 /* Y_KLineVolume.m in Sources */,
 				189433CF1DD446A800F3D618 /* JYViewController.m in Sources */,
 				C06A1F091DDC6CC9008852B0 /* NewJiaoyiViewController.m in Sources */,
@@ -1144,7 +1156,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 3YVUZZ83WV;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "BTC-Kline/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9;
@@ -1153,10 +1165,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/BTC-Kline/Classes/setup/OtherResources/VoiceLib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.StateStreet.com;
+				PRODUCT_BUNDLE_IDENTIFIER = com.StateStreet2.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1167,7 +1180,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 3YVUZZ83WV;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "BTC-Kline/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9;
@@ -1176,10 +1189,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/BTC-Kline/Classes/setup/OtherResources/VoiceLib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.StateStreet.com;
+				PRODUCT_BUNDLE_IDENTIFIER = com.StateStreet2.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

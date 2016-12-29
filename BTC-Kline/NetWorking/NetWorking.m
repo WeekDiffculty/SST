@@ -166,7 +166,6 @@
         if(httpresponse.statusCode==200){
             //请求成功,解析数据
             NSString *str1=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//            NSDictionary *dff = @{@"error":@"",@"data":@{@"rows":@[@{@"order":@"1332296540",@"symbol":@"XAUUSD",@"cmd":@"1",@"volume":@"100",@"sl":@"0",@"tp":@"0",@"open_price":@"1336.69",@"open_time":@"1470477651",@"close_time":@"0",@"close_price":@"1337.19",@"profit":@"-50",@"value_date":@"0",@"expiration":@"0",@"commisson":@"0",@"swap":@"0"}]}};
            NSDictionary *dict = [JsonstrTodic dictionaryWithJsonString:str1] [@"data"];
 //            NSDictionary *dict = dff[@"data"];
               NSArray *array = dict[@"rows"];
@@ -210,7 +209,7 @@
 }
 
 //开仓 open Position 参数:帐号login,密码pwd，商品symbol，数量volume，方向cmd /
-+ (void) openPositionWithApi:(NSString *)url param:(NSDictionary *)param success:(void (^)(NSString *responseObject))success fail:(void (^)(NSError *error))fail{
++ (void) openPositionWithApi:(NSString *)url param:(NSDictionary *)param success:(void (^)(NSDictionary *responseObject))success fail:(void (^)(NSError *error))fail{
     NSURL *urls = [NSURL URLWithString:url];
     NSURLRequest *request = [NSURLRequest requestWithURL:urls];
     NSURLSession * session=[NSURLSession sharedSession];
@@ -222,9 +221,16 @@
         NSHTTPURLResponse *httpresponse=(NSHTTPURLResponse *)response;
         if(httpresponse.statusCode==200){
             //请求成功,解析数据
-            NSString *str=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            
-            success(str);
+            NSMutableString *str=[[NSMutableString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *strLast = [str substringFromIndex:(str.length -1)];
+            NSString *str1;
+            if ([strLast isEqualToString:@"}"]) {
+                str1 = str;
+            }else{
+                str1 = [str substringToIndex:(str.length -1)];
+            }
+            NSDictionary *dict = [JsonstrTodic dictionaryWithJsonString:str1];
+            success(dict);
             dispatch_async(dispatch_get_main_queue(), ^{
                 [task suspend];
             });
@@ -235,7 +241,7 @@
 }
 
 //*平仓 UNWIND 参数:帐号login,密码pwd，单号order,平仓数量volume，品种symbol，价格price/
-+ (void) unwindWithApi:(NSString *)url param:(jioayiModel *)param success:(void (^)(NSString  *responseObject))success fail:(void (^)(NSError *error))fail{
++ (void) unwindWithApi:(NSString *)url param:(jioayiModel *)param success:(void (^)(NSDictionary  *responseObject))success fail:(void (^)(NSError *error))fail{
     Account *ccount = [NSKeyedUnarchiver unarchiveObjectWithFile:[GoodsPath sharePath].account];
     NSString *urlss = [NSString stringWithFormat:@"%@?type=closeorder&price=%@&order=%@&cmd=%@&tp=%@&sl=%@&volume=%@&symbol=%@&login=%@&pwd=%@",url,param.close_price,param.order,param.cmd,param.tp,param.sl,param.volume,param.symbol,ccount.account,ccount.password];
     NSURL *urls = [NSURL URLWithString:urlss];
@@ -249,9 +255,17 @@
         NSHTTPURLResponse *httpresponse=(NSHTTPURLResponse *)response;
         if(httpresponse.statusCode==200){
             //请求成功,解析数据
-            NSString *str=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            
-            success(str);
+            NSMutableString *str=[[NSMutableString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *strLast = [str substringFromIndex:(str.length -1)];
+            NSString *str1;
+            if ([strLast isEqualToString:@"}"]) {
+                str1 = str;
+            }else{
+                str1 = [str substringToIndex:(str.length -1)];
+            }
+            NSDictionary *dict = [JsonstrTodic dictionaryWithJsonString:str1];
+            success(dict);
+
             dispatch_async(dispatch_get_main_queue(), ^{
                 [task suspend];
             });
@@ -288,13 +302,13 @@
     
 }
 
-+ (void)netStatus:(NSString *)url success:(void (^)(BOOL))netStatus{
++ (void)netStatus:(NSString *)url success:(void (^)(BOOL))netStatus fial:(void (^)(BOOL))fail{
     NSURL *urls = [NSURL URLWithString:url];
     NSURLRequest *request = [NSURLRequest requestWithURL:urls];
     NSURLSession * session=[NSURLSession sharedSession];
     NSURLSessionDataTask *task=[session dataTaskWithRequest:request completionHandler:^(NSData * __nullable data, NSURLResponse * __nullable response, NSError * __nullable error){
         if(error){
-            //  NSLog(@"error %@",error);
+            fail(YES);
         }
 //        判断状态响应码
         NSHTTPURLResponse *httpresponse=(NSHTTPURLResponse *)response;

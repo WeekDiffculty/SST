@@ -9,11 +9,12 @@
 #import <UIKit/UIKit.h>
 @class  jioayiModel;
 @class DetailCell;
-@protocol jiaoyiDelegete <NSObject>
-
-- (void)NomalCell:(DetailCell *)cell withjiaoyiModel:(jioayiModel *)model;
-
-@end
+#import "NomalCell.h"
+//@protocol jiaoyiDelegete <NSObject>
+//
+//- (void)NomalCell:(DetailCell *)cell withjiaoyiModel:(jioayiModel *)model;
+//
+//@end
 @interface DetailCell : UITableViewCell
 @property (nonatomic, strong) jioayiModel *model;
 @property (nonatomic, weak) id <jiaoyiDelegete> delegate ;

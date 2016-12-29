@@ -11,6 +11,7 @@
 #import "TubiaoSetUPTableViewController.h"
 #import "RCDCustomerServiceViewController.h"
 #import "Glob.h"
+#import "GuanwangViewController.h"
 @interface SetUpViewController ()
 @property (weak, nonatomic) IBOutlet UITableViewCell *aCount;
 //@property (weak, nonatomic) IBOutlet UITableViewCell *OTP;
@@ -60,7 +61,7 @@
                 
                 break;
             case 1:
-            [self toChat];
+            [self kefu];
                 break;
             case 2:
                 
@@ -74,7 +75,7 @@
     }
 }
 
-- (void)toChat{
+- (void)toChat{//智齿
     RCDCustomerServiceViewController *chatService =
     [[RCDCustomerServiceViewController alloc] init];
 #define SERVICE_ID @"KEFU147970983317739"
@@ -124,6 +125,12 @@
     self.hidesBottomBarWhenPushed = YES;
     [self addChildViewController:chatService];
     [self.navigationController pushViewController:chatService animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
+}
+-(void)kefu{
+    GuanwangViewController *kefuVC = [[GuanwangViewController alloc]init];
+    self.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:kefuVC animated:YES];
     self.hidesBottomBarWhenPushed = NO;
 }
 - (void)didReceiveMemoryWarning {

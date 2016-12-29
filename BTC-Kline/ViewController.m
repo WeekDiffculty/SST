@@ -47,8 +47,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
-    
 }
 #pragma HqDelegate>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -88,7 +86,6 @@
     NewJiaoyiViewController *newVC = [[NewJiaoyiViewController alloc]init];
     newVC.symbol = symbol;
     [JYVC.navigationController pushViewController:newVC animated:YES];
-
 }
 - (BOOL)shouldAutorotate
 {
