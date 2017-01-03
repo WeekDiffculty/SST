@@ -113,7 +113,6 @@
     }else{
         return self.arrayData.count;
     }
-   
 }
 
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(nullable UIView *)view {

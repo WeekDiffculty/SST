@@ -11,7 +11,7 @@
 @class NomalCell;
 @protocol jiaoyiDelegete <NSObject>
 
-- (void)NomalCell:(NomalCell *)cell withjiaoyiModel:(jioayiModel *)model;
+- (void)NomalCell:(UITableViewCell *)cell withjiaoyiModel:(jioayiModel *)model;
 
 @end
 @interface NomalCell : UITableViewCell

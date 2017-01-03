@@ -21,17 +21,17 @@
 +(UIColor *)backgroundColor
 {
     //backColor 自定义的背景颜色
-//  NSInteger color =  [[NSUserDefaults standardUserDefaults]integerForKey:@"backColor"];
-//    if (color) {
-//        NSInteger R=0,G=0,B=0;
-//        R  = color/1000000;
-//        G = (color-(R*1000000))/1000;
-//        B = (color -R *1000000 - G*1000);
-//        return [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:1.0];
-//    }else{
-//        return [UIColor colorWithRGBHex:0x181c20];
-//    }
-    return [UIColor colorWithRGBHex:0x181c20];
+  NSInteger color =  [[NSUserDefaults standardUserDefaults]integerForKey:@"backColor"];
+    if (color) {
+        NSInteger R=0,G=0,B=0;
+        R  = color/1000000;
+        G = (color-(R*1000000))/1000;
+        B = (color -R *1000000 - G*1000);
+        return [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:1.0];
+    }else{
+        return [UIColor colorWithRGBHex:0x181c20];
+    }
+  //  return [UIColor colorWithRGBHex:0x181c20];
 }
 
 #pragma mark 辅助背景色

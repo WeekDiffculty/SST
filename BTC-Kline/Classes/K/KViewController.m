@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *symbol;
 @property (nonatomic, weak) UIView *chatView;
 @property (weak, nonatomic) IBOutlet UIView *MiddleView;
+@property (nonatomic, weak) Y_StockChartViewController *Y_StockChartVC;
 @end
 
 @implementation KViewController
@@ -67,16 +68,8 @@
     [self loadDefaultSetting];
 }
 - (void)loadDefaultSetting{
-    Y_StockChartViewController *srockChartViewController = [[Y_StockChartViewController alloc]init];
-    [self addChildViewController:srockChartViewController];
-    [self.view addSubview: srockChartViewController.view];
-    self.chatView = srockChartViewController.view;
-    [srockChartViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.trailing.equalTo(self.view);
-        make.top.equalTo(self.view).offset(64);
-        make.bottom.equalTo(self.view).offset(-44);
-    }];
-    self.title = @"图表";
+    
+       self.title = @"图表";
    
     UILabel *label = [[UILabel alloc]init];
     [self.MiddleView addSubview:label];
@@ -91,6 +84,24 @@
     label.text = @"图表";
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [self.chatView removeFromSuperview];
+    [self.Y_StockChartVC removeFromParentViewController];
+    self.Y_StockChartVC = nil;
+}
+- (void)viewWillAppear:(BOOL)animated{
+    Y_StockChartViewController *srockChartViewController = [[Y_StockChartViewController alloc]init];
+    self.Y_StockChartVC = srockChartViewController;
+    [self addChildViewController:srockChartViewController];
+    [self.view addSubview: srockChartViewController.view];
+    self.chatView = srockChartViewController.view;
+    [srockChartViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.trailing.equalTo(self.view);
+        make.top.equalTo(self.view).offset(64);
+        make.bottom.equalTo(self.view).offset(-44);
+    }];
+
+}
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
     SymbolModel *model = self.arrayData[row];
     self.symbol.title = model.symbolName;
