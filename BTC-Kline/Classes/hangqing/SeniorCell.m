@@ -50,6 +50,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             self.symbolName.text = responseObject.symble;
             NSString *str = responseObject.price;
+            self.time.text = responseObject.time;
             NSInteger length = str.length;
             if (length>3) {
                 self.gewei.text = [str substringToIndex:(length -3)];

@@ -16,6 +16,7 @@
 #import "MJExtension.h"
 #import "Glob.h"
 #import "GoodsDetail.h"
+#import "wrongStringtoJsonString.h"
 @implementation NetWorking
 
 +(void)requestWithApi:(NSString *)url param:(NSMutableDictionary *)param thenSuccess:(void (^)(NSDictionary *responseObject))success fail:(void (^)(void))fail
@@ -53,9 +54,11 @@
             if(httpresponse.statusCode==200){
                 //请求成功,解析数据
                 NSString *str=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                NSArray *rightAraay = [NSArray array];
+                rightAraay = [wrongStringtoJsonString getJsonString:str];
                 //NSLog(@"%@",str);
-                NSArray *array = [str componentsSeparatedByString:@"|"];
-                success([HangQing hangqingModelWith:array]);
+                //NSArray *array = [str componentsSeparatedByString:@"|"];
+                success([HangQing hangqingModelWith:rightAraay]);
                 //NSLog(@"%@",array);
                 dispatch_async(dispatch_get_main_queue(), ^{
                   [task suspend];
@@ -323,4 +326,5 @@
     //4.启动请求
     [task resume];
 }
+
 @end

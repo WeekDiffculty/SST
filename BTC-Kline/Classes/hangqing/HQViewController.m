@@ -229,7 +229,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [self chekNet];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:3.5 target:self selector:@selector(refresh) userInfo:nil repeats:YES];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(refresh) userInfo:nil repeats:YES];
     [self.timer fire];
     self.arrayData = nil;
     NSLog(@"%@", self.arrayData);

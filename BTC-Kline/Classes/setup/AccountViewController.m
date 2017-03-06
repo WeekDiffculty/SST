@@ -58,15 +58,16 @@
     self.title = @"账户";
     UIBarButtonItem *buttonitem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"add_22x22_"] style:0 target:self action:@selector(addAcount)];
     Account *ccount = [NSKeyedUnarchiver unarchiveObjectWithFile:[GoodsPath sharePath].account];
-    if (![ccount.account isEqualToString:@""]&&ccount) {//已登陆
-        [self loginedWithconfig:ccount];
-    }else{//未登陆
-         self.navigationItem.rightBarButtonItem = buttonitem;
-        [self.view addSubview:self.noLoginView];
-        self.noLoginView.text = @"当前没有已登陆用户，请点击右上角加号添加账号";
-        self.noLoginView.textAlignment = NSTextAlignmentCenter;
-        self.noLoginView.font = [UIFont systemFontOfSize:13];
-    }
+      [self loginedWithconfig:ccount];
+//    if (![ccount.account isEqualToString:@""]&&ccount) {//已登陆
+//        [self loginedWithconfig:ccount];
+//    }else{//未登陆
+//         self.navigationItem.rightBarButtonItem = buttonitem;
+//        [self.view addSubview:self.noLoginView];
+//        self.noLoginView.text = @"当前没有已登陆用户，请点击右上角加号添加账号";
+//        self.noLoginView.textAlignment = NSTextAlignmentCenter;
+//        self.noLoginView.font = [UIFont systemFontOfSize:13];
+//    }
     
 }
 

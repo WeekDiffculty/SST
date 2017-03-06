@@ -21,13 +21,13 @@
 #import "JsonstrTodic.h"
 #import "MJExtension.h"
 //*行情*/
-#define  HQJK @"http://47.89.53.7:8777/api/?type=singlequote&symbol="
+#define  HQJK @"http://119.23.130.36:777/?query=price&type=jsonret&symbol="
 //商品详情
 #define GOODSDETAIl @"http://47.89.53.7:8788/api/?type=symbolinfo&symbol="
 //账号密码校验3
 #define ACCOUNT_PASSWORD @"http://47.89.53.7:8788/api/"
 //用户查询
-#define USER_SEARCH @"http://47.89.53.7:8788/api/"
+#define USER_SEARCH @"http://47.89.53.7:877/?type=getuser&login=2123479292"
 //查持仓
 #define CHICANG @"http://47.89.53.7:8788/api/"
 //历史K线
@@ -42,8 +42,9 @@
 //头像
 #define PORTRAITURLI @"http://img5.duitang.com/uploads/item/201601/06/20160106061634_ALNQs.jpeg"
 
-#ifdef DEBUG
-#define NSLog(fmt, ...) NSLog((fmt), ##__VA_ARGS__);
-#else
-#define NSLog(...);
+/** 自定义 Log  */
+#ifdef DEBUG  // 调试的时候
+#define YRLog(...) NSLog(@" %s 第%d行 \n %@", __func__, __LINE__, [NSString stringWithFormat:__VA_ARGS__])
+#else   //发布的时候
+#define YRLog(...)
 #endif

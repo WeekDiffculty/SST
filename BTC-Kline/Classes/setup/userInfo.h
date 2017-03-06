@@ -25,11 +25,23 @@
 
 */
 #import <Foundation/Foundation.h>
-
+/*
+ LOGIN 用户ID
+ GROUP 组
+ NAME 姓名
+ BALANCE 账户余额
+ MARGIN 已用保证金
+ MARGIN_FREE 可用保证金
+ */
 @interface userInfo : NSObject
+/**LOGIN 用户ID */
 @property (nonatomic, copy) NSString *login;
+
 @property (nonatomic, copy) NSString *agent_account;
+/**BALANCE 账户余额*/
 @property (nonatomic, copy) NSString *balance;
+/** GROUP 组
+ */
 @property (nonatomic, copy) NSString *group;
 @property (nonatomic, copy) NSString *profit;
 
@@ -39,10 +51,13 @@
 @property (nonatomic, copy) NSString *enable_read_only;
 @property (nonatomic, copy) NSString *equity;
 @property (nonatomic, copy) NSString *flags;
+/**MARGIN_FREE 可用保证金*/
 @property (nonatomic, copy) NSString *freemagrin;
 @property (nonatomic, copy) NSString *ip;
 @property (nonatomic, copy) NSString *leverage;
+/**MARGIN 已用保证金*/
 @property (nonatomic, copy) NSString *magrin;
+/**NAME*/
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *password;
 @property (nonatomic, copy) NSString *prevbalance;

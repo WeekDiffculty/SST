@@ -32,6 +32,7 @@
 
 @implementation NextJiaoyiViewController
 
+
 - (UIDatePicker *)datePicker{
     if (!_datePicker) {
         _datePicker = [[UIDatePicker alloc]init];
@@ -158,6 +159,7 @@
     }];
 }
 - (void)viewWillAppear:(BOOL)animated{
+    
     self.timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(setCurrentPrice) userInfo:nil repeats:YES];
     [self.timer fire];
 }

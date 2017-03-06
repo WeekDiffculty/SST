@@ -5,7 +5,14 @@
 //  Created by zbf920563837@icloud.com on 2016/11/22.
 //  Copyright © 2016年 yate1996. All rights reserved.
 //
-
+/*
+ LOGIN 用户ID
+ GROUP 组
+ NAME 姓名
+ BALANCE 账户余额
+ MARGIN 已用保证金
+ MARGIN_FREE 可用保证金
+ */
 #import "userInfo.h"
 
 @implementation userInfo
@@ -13,10 +20,10 @@
     if(dict==nil)return nil;
     userInfo *userinfo = [[userInfo alloc]init];
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
-    userinfo.login = [formatter stringFromNumber: dict[@"login"]];
+    userinfo.login = [formatter stringFromNumber: dict[@"LOGIN"]];
     userinfo.agent_account = [formatter stringFromNumber: dict[@"agent_account"]];
-    userinfo.balance = [formatter stringFromNumber: dict[@"balance"]];
-    userinfo.group = dict[@"group"];
+    userinfo.balance = [formatter stringFromNumber: dict[@"BALANCE"]];
+    userinfo.group = dict[@"GROUP"];
     formatter.numberStyle = kCFNumberFormatterDecimalStyle;
     userinfo.profit = [formatter stringFromNumber: dict[@"profit"]];
     formatter.numberStyle = kCFNumberFormatterNoStyle;
@@ -26,11 +33,11 @@
    userinfo.enable_read_only = dict[@"enable_read_only"];
    userinfo.equity = dict[@"equity"];
    userinfo.flags = dict[@"flags"];
-   userinfo.freemagrin = dict[@"freemagrin"];
+   userinfo.freemagrin = dict[@"MARGIN_FREE"];
    userinfo.ip = dict[@"ip"];
    userinfo.leverage = dict[@"leverage"];
-   userinfo.magrin = dict[@"magrin"];
-   userinfo.name = dict[@"name"];
+   userinfo.magrin = dict[@"MARGIN"];
+   userinfo.name = dict[@"NAME"];
    userinfo.password = dict[@"password"];
    userinfo.prevbalance = dict[@"prevbalance"];
 

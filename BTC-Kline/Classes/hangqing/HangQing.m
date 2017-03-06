@@ -15,8 +15,12 @@
     model.symble = array[0];
     model.price = array[1];
     NSString *times = array.lastObject;
-    NSArray *arrayTime = [times componentsSeparatedByString:@" "];
-    model.time = arrayTime.lastObject;
+    //NSArray *arrayTime = [times componentsSeparatedByString:@" "];
+    NSDate *myDate=[NSDate dateWithTimeIntervalSince1970:times.floatValue];
+    NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"MM.dd HH:mm:ss"];
+    NSString *timeStr = [formatter stringFromDate:myDate];
+    model.time = timeStr;
     
     return model;
 }
