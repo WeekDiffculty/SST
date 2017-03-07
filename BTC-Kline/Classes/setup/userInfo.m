@@ -40,7 +40,6 @@
    userinfo.name = dict[@"NAME"];
    userinfo.password = dict[@"password"];
    userinfo.prevbalance = dict[@"prevbalance"];
-
     return  userinfo;
 }
 @end

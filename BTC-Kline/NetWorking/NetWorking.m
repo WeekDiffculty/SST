@@ -128,29 +128,37 @@
 
 //*User query/
 + (void)userQueryWithApi:(NSString *)url account:(NSString *)account password:(NSString *)passWord success:(void (^)(userInfo *responseObject))success fail:(void (^)(NSError *error))fail{
-    NSString *str = [NSString stringWithFormat:@"%@?type=userinfo&login=%@&password=%@",url,account,passWord];
-    NSURL *urls = [NSURL URLWithString:str];
-    NSURLRequest *request = [NSURLRequest requestWithURL:urls];
-    NSURLSession * session=[NSURLSession sharedSession];
-    NSURLSessionDataTask *task=[session dataTaskWithRequest:request completionHandler:^(NSData * __nullable data, NSURLResponse * __nullable response, NSError * __nullable error){
-        if(error){
-            !error?:fail(error);
-        }
-        //判断状态响应码
-        NSHTTPURLResponse *httpresponse=(NSHTTPURLResponse *)response;
-        if(httpresponse.statusCode==200){
-            //请求成功,解析数据
-            NSString *str=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-           NSDictionary *dict = [JsonstrTodic dictionaryWithJsonString:str];
-            userInfo *model = [userInfo userInfoWith:dict[@"data"]];
-                success(model);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [task suspend];
-            });
-        }
+//    NSString *str = [NSString stringWithFormat:@"%@?type=userinfo&login=%@&password=%@",url,account,passWord];
+//    NSURL *urls = [NSURL URLWithString:str];
+//    NSURLRequest *request = [NSURLRequest requestWithURL:urls];
+//    NSURLSession * session=[NSURLSession sharedSession];
+//    NSURLSessionDataTask *task=[session dataTaskWithRequest:request completionHandler:^(NSData * __nullable data, NSURLResponse * __nullable response, NSError * __nullable error){
+//        if(error){
+//            !error?:fail(error);
+//        }
+//        //判断状态响应码
+//        NSHTTPURLResponse *httpresponse=(NSHTTPURLResponse *)response;
+//        if(httpresponse.statusCode==200){
+//            //请求成功,解析数据
+//            NSString *str=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//           NSDictionary *dict = [JsonstrTodic dictionaryWithJsonString:str];
+//            userInfo *model = [userInfo userInfoWith:dict[@"data"]];
+//                success(model);
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [task suspend];
+//            });
+//        }
+//    }];
+//    //4.启动请求
+//    [task resume];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain", nil];
+    [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *dict = (NSDictionary *) responseObject;
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error.userInfo);
     }];
-    //4.启动请求
-    [task resume];
 }
 
 //*查持仓/
