@@ -67,11 +67,12 @@
     }
     return _orderEdtingView;
 }
- 
+#pragma 测试。。。。。。。。
 - (void)viewWillAppear:(BOOL)animated{
     Account *ccount = [NSKeyedUnarchiver unarchiveObjectWithFile:[GoodsPath sharePath].account];
     if ([ccount.account isEqualToString:@""]||!ccount.account) {
         self.symbolAndBanlance.text = @"未登录";
+        [self.timer fire];
     }else{
      [self.timer fire];
     }
@@ -154,7 +155,9 @@
     [NetWorking userQueryWithApi:USER_SEARCH account:ccount.account password:ccount.password success:^(userInfo *responseObject) {//
         dispatch_async(dispatch_get_main_queue(), ^{
             weakself.jieyu.text = responseObject.balance;
-            weakself.jingzhi.text = responseObject.profit;
+            weakself.jingzhi.text = responseObject.magrin;
+            weakself.yufukuan.text = responseObject.freemagrin;
+            
         })  ;
     } fail:^(NSError *error) {
     }];

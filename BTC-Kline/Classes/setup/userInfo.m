@@ -20,9 +20,9 @@
     if(dict==nil)return nil;
     userInfo *userinfo = [[userInfo alloc]init];
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
-    userinfo.login = [formatter stringFromNumber: dict[@"LOGIN"]];
+    userinfo.login = dict[@"LOGIN"];
     userinfo.agent_account = [formatter stringFromNumber: dict[@"agent_account"]];
-    userinfo.balance = [formatter stringFromNumber: dict[@"BALANCE"]];
+    userinfo.balance =  dict[@"BALANCE"];
     userinfo.group = dict[@"GROUP"];
     formatter.numberStyle = kCFNumberFormatterDecimalStyle;
     userinfo.profit = [formatter stringFromNumber: dict[@"profit"]];

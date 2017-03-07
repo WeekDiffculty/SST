@@ -58,6 +58,7 @@
     self.title = @"账户";
     UIBarButtonItem *buttonitem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"add_22x22_"] style:0 target:self action:@selector(addAcount)];
     Account *ccount = [NSKeyedUnarchiver unarchiveObjectWithFile:[GoodsPath sharePath].account];
+#pragma 测试。。。。。。
       [self loginedWithconfig:ccount];
 //    if (![ccount.account isEqualToString:@""]&&ccount) {//已登陆
 //        [self loginedWithconfig:ccount];
@@ -79,7 +80,8 @@
     [self.view addSubview:self.logOutBtn];
      [self.view addSubview:self.logined];
     WeakObj(self);
-    [NetWorking userQueryWithApi:USER_SEARCH account:ccount.account password:ccount.password success:^(userInfo *responseObject) {//
+    
+    [NetWorking userQueryWithApi:[NSString stringWithFormat:@"%@",USER_SEARCH] account:ccount.account password:ccount.password success:^(userInfo *responseObject) {//
         dispatch_async(dispatch_get_main_queue(), ^{
             weakself.logined.model = responseObject;
         })  ;

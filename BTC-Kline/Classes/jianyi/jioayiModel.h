@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface jioayiModel : NSObject
+@property (nonatomic, copy) NSString *DIGITS;
 @property (nonatomic, copy) NSString *order;
 @property (nonatomic, copy) NSString *symbol;
 @property (nonatomic, copy) NSString *cmd;

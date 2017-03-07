@@ -128,43 +128,8 @@
 
 //*User query/
 + (void)userQueryWithApi:(NSString *)url account:(NSString *)account password:(NSString *)passWord success:(void (^)(userInfo *responseObject))success fail:(void (^)(NSError *error))fail{
-//    NSString *str = [NSString stringWithFormat:@"%@?type=userinfo&login=%@&password=%@",url,account,passWord];
-//    NSURL *urls = [NSURL URLWithString:str];
-//    NSURLRequest *request = [NSURLRequest requestWithURL:urls];
-//    NSURLSession * session=[NSURLSession sharedSession];
-//    NSURLSessionDataTask *task=[session dataTaskWithRequest:request completionHandler:^(NSData * __nullable data, NSURLResponse * __nullable response, NSError * __nullable error){
-//        if(error){
-//            !error?:fail(error);
-//        }
-//        //判断状态响应码
-//        NSHTTPURLResponse *httpresponse=(NSHTTPURLResponse *)response;
-//        if(httpresponse.statusCode==200){
-//            //请求成功,解析数据
-//            NSString *str=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//           NSDictionary *dict = [JsonstrTodic dictionaryWithJsonString:str];
-//            userInfo *model = [userInfo userInfoWith:dict[@"data"]];
-//                success(model);
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [task suspend];
-//            });
-//        }
-//    }];
-//    //4.启动请求
-//    [task resume];
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain", nil];
-    [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSDictionary *dict = (NSDictionary *) responseObject;
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@",error.userInfo);
-    }];
-}
-
-//*查持仓/
-+ (void)checkThepositionWithApi:(NSString *)url account:(NSString *)account password:(NSString *)passWord success:(void (^)(NSArray
- *responseObject))success fail:(void (^)(NSError *error))fail{
-    NSString *str = [NSString stringWithFormat:@"%@?type=orderlist&login=%@&password=%@",url,account,passWord];
+   // NSString *str = [NSString stringWithFormat:@"%@?type=userinfo&login=%@&password=%@",url,account,passWord];
+    NSString *str = @"http://47.89.53.7:877/?type=getuser&login=2123479292";
     NSURL *urls = [NSURL URLWithString:str];
     NSURLRequest *request = [NSURLRequest requestWithURL:urls];
     NSURLSession * session=[NSURLSession sharedSession];
@@ -176,10 +141,42 @@
         NSHTTPURLResponse *httpresponse=(NSHTTPURLResponse *)response;
         if(httpresponse.statusCode==200){
             //请求成功,解析数据
+            NSString *str=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+           NSDictionary *dict = [JsonstrTodic dictionaryWithJsonString:str];
+            NSArray *array = dict[@"userlist"];
+            NSDictionary *dicts = array[0];
+           // userInfo *model = [userInfo userInfoWith:dict[@"data"]];
+            userInfo *model = [userInfo userInfoWith:dicts];
+                success(model);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [task suspend];
+            });
+        }
+    }];
+    //4.启动请求
+    [task resume];
+}
+
+//*查持仓/
++ (void)checkThepositionWithApi:(NSString *)url account:(NSString *)account password:(NSString *)passWord success:(void (^)(NSArray
+ *responseObject))success fail:(void (^)(NSError *error))fail{
+    NSString *str = [NSString stringWithFormat:@"%@?type=orderlist&login=%@&password=%@",url,account,passWord];
+    NSURL *urls = [NSURL URLWithString:url];
+    NSURLRequest *request = [NSURLRequest requestWithURL:urls];
+    NSURLSession * session=[NSURLSession sharedSession];
+    NSURLSessionDataTask *task=[session dataTaskWithRequest:request completionHandler:^(NSData * __nullable data, NSURLResponse * __nullable response, NSError * __nullable error){
+        if(error){
+            !error?:fail(error);
+        }
+        //判断状态响应码
+        NSHTTPURLResponse *httpresponse=(NSHTTPURLResponse *)response;
+        if(httpresponse.statusCode==200){
+            //请求成功,解析数据
             NSString *str1=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-           NSDictionary *dict = [JsonstrTodic dictionaryWithJsonString:str1] [@"data"];
+           NSDictionary *dict = [JsonstrTodic dictionaryWithJsonString:str1];
 //            NSDictionary *dict = dff[@"data"];
-              NSArray *array = dict[@"rows"];
+            NSArray *array = dict[@"orderlist"];
+              //NSArray *arrays = dict[@"rows"];
             success(array);
             dispatch_async(dispatch_get_main_queue(), ^{
                 [task suspend];

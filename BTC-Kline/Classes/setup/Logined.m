@@ -19,10 +19,11 @@
 }
 - (void)setModel:(userInfo *)model{
         _model = model;
+    self.name.text = model.name;
         self.account.text = model.login;
         self.group.text = model.group;
         self.balance.text =model.balance;
-        self.agent_account.text = model.agent_account;
-        self.profit.text = model.profit;
+        self.agent_account.text = model.magrin;
+        self.profit.text = model.freemagrin;
 }
 @end

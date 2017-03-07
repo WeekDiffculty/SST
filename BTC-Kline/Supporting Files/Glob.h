@@ -29,7 +29,7 @@
 //用户查询
 #define USER_SEARCH @"http://47.89.53.7:877/?type=getuser&login=2123479292"
 //查持仓
-#define CHICANG @"http://47.89.53.7:8788/api/"
+#define CHICANG @"http://47.89.53.7:877/?type=getorder&login=2123479292"
 //历史K线
 #define K_LINE @"http://47.89.53.7:8788/api/"
 //开仓
