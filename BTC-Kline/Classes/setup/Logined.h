@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *balance;
 @property (weak, nonatomic) IBOutlet UILabel *agent_account;
 @property (weak, nonatomic) IBOutlet UILabel *profit;
+@property (weak, nonatomic) IBOutlet UILabel *rateMargin;
 @property (weak, nonatomic) IBOutlet UILabel *name;
 @property (nonatomic, strong) userInfo *model ;
 +(instancetype)logined;

@@ -25,5 +25,6 @@
         self.balance.text =model.balance;
         self.agent_account.text = model.magrin;
         self.profit.text = model.freemagrin;
+        self.rateMargin.text = model.ratemargin;
 }
 @end

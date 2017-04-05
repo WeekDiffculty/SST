@@ -61,5 +61,7 @@
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *password;
 @property (nonatomic, copy) NSString *prevbalance;
+/**保证金比率*/
+@property (nonatomic, copy) NSString *ratemargin;
 + (instancetype) userInfoWith:(NSDictionary *)dict;
 @end

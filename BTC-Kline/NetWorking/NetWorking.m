@@ -129,8 +129,7 @@
 //*User query/
 + (void)userQueryWithApi:(NSString *)url account:(NSString *)account password:(NSString *)passWord success:(void (^)(userInfo *responseObject))success fail:(void (^)(NSError *error))fail{
    // NSString *str = [NSString stringWithFormat:@"%@?type=userinfo&login=%@&password=%@",url,account,passWord];
-    NSString *str = @"http://47.89.53.7:877/?type=getuser&login=2123479292";
-    NSURL *urls = [NSURL URLWithString:str];
+    NSURL *urls = [NSURL URLWithString:url];
     NSURLRequest *request = [NSURLRequest requestWithURL:urls];
     NSURLSession * session=[NSURLSession sharedSession];
     NSURLSessionDataTask *task=[session dataTaskWithRequest:request completionHandler:^(NSData * __nullable data, NSURLResponse * __nullable response, NSError * __nullable error){
@@ -251,7 +250,8 @@
 //*平仓 UNWIND 参数:帐号login,密码pwd，单号order,平仓数量volume，品种symbol，价格price/
 + (void) unwindWithApi:(NSString *)url param:(jioayiModel *)param success:(void (^)(NSDictionary  *responseObject))success fail:(void (^)(NSError *error))fail{
     Account *ccount = [NSKeyedUnarchiver unarchiveObjectWithFile:[GoodsPath sharePath].account];
-    NSString *urlss = [NSString stringWithFormat:@"%@?type=closeorder&price=%@&order=%@&cmd=%@&tp=%@&sl=%@&volume=%@&symbol=%@&login=%@&pwd=%@",url,param.close_price,param.order,param.cmd,param.tp,param.sl,param.volume,param.symbol,ccount.account,ccount.password];
+#pragma ..lkjfkdslfadsj;fsd
+    NSString *urlss = [NSString stringWithFormat:@"%@?type=closeorder&order=%@&volume=%@&symbol=%@&login=%@&password=%@",url,param.order,param.volume,param.symbol,@"10080",@"abc123"];
     NSURL *urls = [NSURL URLWithString:urlss];
     NSURLRequest *request = [NSURLRequest requestWithURL:urls];
     NSURLSession * session=[NSURLSession sharedSession];

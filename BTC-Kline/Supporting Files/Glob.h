@@ -9,7 +9,6 @@
 #define Glob_h
 #define Width [UIScreen mainScreen].bounds.size.width
 #define Height [UIScreen mainScreen].bounds.size.height
-
 #define WeakObj(obj) __weak typeof(obj) weak##obj = obj
 //#define StrongObj(obj) __strong typeof(obj) strong##obj = obj
 #import "Reachability.h"
@@ -21,7 +20,7 @@
 #import "JsonstrTodic.h"
 #import "MJExtension.h"
 //*行情*/
-#define  HQJK @"http://119.23.130.36:777/?query=price&type=jsonret&symbol="
+#define  HQJK @"http://43.241.51.45:777/?query=price&type=jsonret&symbol="
 //商品详情
 #define GOODSDETAIl @"http://47.89.53.7:8788/api/?type=symbolinfo&symbol="
 //账号密码校验3

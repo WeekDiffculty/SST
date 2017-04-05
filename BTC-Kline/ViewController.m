@@ -66,6 +66,7 @@
 #pragma KVIEWDELEGATE<<<<<<<新交易<<<<<<<<<<<<<<<<<<<
 -(void)KViewVC:(UIViewController *)KViewController withSymbol:(NSString *)symbol{
     [self ToNewJiaoyiWithSymbol:symbol];
+    
 }
 
 //打开图表对应商品

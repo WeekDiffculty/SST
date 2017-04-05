@@ -99,7 +99,8 @@
         [self tip:@"目前只支持即时买入、即时卖出哦！"];
         return;
     }
-    NSString *openURL = [NSString stringWithFormat:@"%@?type=%@&volume=%@&price=%@&symbol=%@&cmd=%@&SL=%@&TP=%@&server=%@&login=%@&pwd=%@",OPEN_POSITION,@"openorder",@(self.volums),self.price,self.model.symbolName?self.model.symbolName:self.symbol,cmd,self.SL?self.SL:@0,self.TP?self.TP:@0,self.server?self.server:@0,ccount.account,ccount.password];
+#pragma dfjdsfldsjfldsfjdslkfj
+    NSString *openURL = [NSString stringWithFormat:@"%@?type=%@&volume=%@&symbol=%@&cmd=%@&SL=%@&TP=%@&login=%@&password=%@",OPEN_POSITION,@"openorder",@(self.volums),self.model.symbolName?self.model.symbolName:self.symbol,cmd,self.SL?self.SL:@0,self.TP?self.TP:@0,@"10080",@"abc123"];
     [NetWorking openPositionWithApi:openURL param:nil success:^(NSDictionary *responseObject) {
         NSString *resault = responseObject[@"error"];
         if ([resault isEqualToString:@""]) {

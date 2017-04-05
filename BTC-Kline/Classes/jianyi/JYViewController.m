@@ -157,7 +157,7 @@
             weakself.jieyu.text = responseObject.balance;
             weakself.jingzhi.text = responseObject.magrin;
             weakself.yufukuan.text = responseObject.freemagrin;
-            
+            weakself.keyongyufukuan.text = responseObject.ratemargin;
         })  ;
     } fail:^(NSError *error) {
     }];
@@ -170,7 +170,15 @@
         jioayiModel *model = self.arrayData[index];
         self.profit += [model.profit doubleValue];
     }
-     self.symbolAndBanlance.text = [NSString stringWithFormat:@"%g",self.profit];
+    NSString *zf = [[NSString alloc]init];
+    if (self.profit>=0) {
+        zf = @"+";
+        self.symbolAndBanlance.textColor = [UIColor redColor];
+    }else{
+        zf = @"-";
+        self.symbolAndBanlance.textColor = [UIColor blueColor];
+    }
+     self.symbolAndBanlance.text = [NSString stringWithFormat:@"%@%g",zf,self.profit];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     self.isDetail = !_isDetail;
